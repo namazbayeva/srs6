@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:srs5/pages/home_page.dart';
 import 'package:srs5/pages/second_page.dart';
-import 'package:srs5/pages/third_page.dart';
 import 'package:srs5/pages/user_info_page.dart';
+import 'package:srs5/ui/pages/third_page.dart';
 
 class BottomBarPage extends StatefulWidget {
   final String name;
@@ -23,11 +23,11 @@ class _BottomBarPageState extends State<BottomBarPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bottom Bar Page'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.grey,
       ),
       body: _buildPage(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.grey,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -37,7 +37,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.orange),
-            label: 'Home Page',
+            label: 'Home Page', backgroundColor: Colors.grey,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite, color: Colors.orange),

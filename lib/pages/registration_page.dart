@@ -25,11 +25,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(controller: nameController, decoration: InputDecoration(labelText: 'Name')),
+            _buildTextFieldWithIcon(
+              controller: nameController,
+              labelText: 'Name',
+              icon: Icons.person,
+              
+            ),
             SizedBox(height: 20),
-            TextField(controller: emailController, decoration: InputDecoration(labelText: 'Email')),
+            _buildTextFieldWithIcon(
+              controller: emailController,
+              labelText: 'Email',
+              icon: Icons.email,
+            ),
             SizedBox(height: 20),
-            TextField(controller: phoneNumberController, decoration: InputDecoration(labelText: 'Phone Number')),
+            _buildTextFieldWithIcon(
+              controller: phoneNumberController,
+              labelText: 'Phone Number',
+              icon: Icons.phone,
+            ),
             SizedBox(height: 20),
             TextField(
               controller: passwordController,
@@ -50,25 +63,40 @@ class _RegistrationPageState extends State<RegistrationPage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Perform registration logic
+                
 
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (context) => BottomBarPage(
-                      // Pass user data to BottomBarPage
+                
                       name: nameController.text,
                       email: emailController.text,
                       phoneNumber: phoneNumberController.text,
                     ),
                   ),
-                  (route) => false, // Remove all routes except the new one
+                  (route) => false, 
                 );
               },
               child: Text('Register'),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldWithIcon({
+    required TextEditingController controller,
+    required String labelText,
+    required IconData icon,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: 'Enter your $labelText',
+        prefixIcon: Icon(icon),
       ),
     );
   }

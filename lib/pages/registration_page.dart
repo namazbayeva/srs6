@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srs5/service/shared_preference.dart';
 import 'bottom_bar_page.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -29,7 +30,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               controller: nameController,
               labelText: 'Name',
               icon: Icons.person,
-              
             ),
             SizedBox(height: 20),
             _buildTextFieldWithIcon(
@@ -44,38 +44,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
               icon: Icons.phone,
             ),
             SizedBox(height: 20),
-            TextField(
+            _buildPasswordTextFieldWithIcon(
               controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
-                suffixIcon: IconButton(
-                  icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordVisible = !_isPasswordVisible;
-                    });
-                  },
-                ),
-              ),
-              obscureText: !_isPasswordVisible,
+              labelText: 'Password',
+              icon: Icons.lock,
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                
+                SharedPreferenceHelper.setAuthenticated(true);
 
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (context) => BottomBarPage(
-                
                       name: nameController.text,
                       email: emailController.text,
                       phoneNumber: phoneNumberController.text,
                     ),
                   ),
-                  (route) => false, 
+                  (route) => false,
                 );
               },
               child: Text('Register'),
@@ -98,6 +86,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
         hintText: 'Enter your $labelText',
         prefixIcon: Icon(icon),
       ),
+    );
+  }
+
+  Widget _buildPasswordTextFieldWithIcon({
+    required TextEditingController controller,
+    required String labelText,
+    required IconData icon,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: 'Enter your $labelText',
+        prefixIcon: Icon(icon),
+        suffixIcon: IconButton(
+          icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _isPasswordVisible = !_isPasswordVisible;
+            });
+          },
+        ),
+      ),
+      obscureText: !_isPasswordVisible,
     );
   }
 }

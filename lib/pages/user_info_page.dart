@@ -1,52 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserInfoPage extends StatelessWidget {
-  final String name;
-  final String email;
-  final String phoneNumber;
-
-  UserInfoPage({required this.name, required this.email, required this.phoneNumber});
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('User Info Page'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Name:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+    return FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder: (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator(); // или другой индикатор загрузки
+        } else {
+          final SharedPreferences prefs = snapshot.data!;
+          final String name = prefs.getString('name') ?? '';
+          final String email = prefs.getString('email') ?? '';
+          final String phoneNumber = prefs.getString('phoneNumber') ?? '';
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('User Info Page'),
             ),
-            Text(
-              name,
-              style: TextStyle(fontSize: 16.0),
+            body: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Name:',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    name,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    'Email:',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    email,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    'Phone Number:',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    phoneNumber,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 20.0),
-            Text(
-              'Email:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              email,
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              'Phone Number:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              phoneNumber,
-              style: TextStyle(fontSize: 16.0),
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 }

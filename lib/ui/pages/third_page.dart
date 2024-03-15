@@ -59,7 +59,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 Text("User ID: ${profileUser.userId}"),
                 Text("Title: ${profileUser.title}"),
                 Text("Body: ${profileUser.body}"),
-                Divider(), // Add a divider between items
+                Divider(),
               ],
             ),
           );

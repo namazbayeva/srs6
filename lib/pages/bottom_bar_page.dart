@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:srs5/pages/home_page.dart';
+import 'package:srs5/pages/language_selection_page.dart';
 import 'package:srs5/pages/second_page.dart';
 import 'package:srs5/pages/user_info_page.dart';
 import 'package:srs5/ui/pages/third_page.dart';
+
+
 
 class BottomBarPage extends StatefulWidget {
   final String name;
@@ -13,6 +16,20 @@ class BottomBarPage extends StatefulWidget {
 
   @override
   _BottomBarPageState createState() => _BottomBarPageState();
+}
+
+class MyApp extends StatelessWidget {
+  final bool isAuthenticated;
+
+  MyApp({required this.isAuthenticated});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My App',
+      home: isAuthenticated ? BottomBarPage(name: '', email: '', phoneNumber: '') : LanguageSelectionPage(),
+    );
+  }
 }
 
 class _BottomBarPageState extends State<BottomBarPage> {
@@ -65,7 +82,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
       case 2:
         return ThirdPage();
       case 3:
-        return UserInfoPage(name: widget.name, email: widget.email, phoneNumber: widget.phoneNumber);
+        return UserInfoPage();
       default:
         return Container();
     }

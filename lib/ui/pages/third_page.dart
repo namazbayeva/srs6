@@ -3,20 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:srs5/model/profile_user.dart';
 import 'package:srs5/profile/bloc/profile_bloc.dart';
 
-
-
 class ThirdPage extends StatefulWidget {
-  const ThirdPage ({super.key});
+  const ThirdPage({Key? key}) : super(key: key);
 
   @override
   State<ThirdPage> createState() => _ThirdPageState();
-
-  
 }
 
 class _ThirdPageState extends State<ThirdPage> {
   late ProfileBloc profileBloc;
-  ProfileUser? profileUser;
+  List<ProfileUser> profileUserList = [];
 
   @override
   void initState() {
@@ -26,40 +22,48 @@ class _ThirdPageState extends State<ThirdPage> {
   }
 
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer(
+      body: BlocBuilder(
         bloc: profileBloc,
-        listener: (context, state) {
-          print("hererrer $state");
-          if (state is FailureProfileState) {
-            return;
-          }
-        },
         builder: (context, state) {
           if (state is LoadingProfileState) {
-            return Center(child: CircularProgressIndicator(
-              color: Colors.red,
-            ));
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.red,
+              ),
+            );
           }
           if (state is LoadedProfileState) {
-            profileUser = state.profileUser;
-            print(">>>>>>>>>>>>>$profileUser");
+            profileUserList = state.profileUser;
+            return buildBody();
           }
-          return Container(
-            color: Colors.white,
-            child: Center(
-              child: Text(
-                "${profileUser?.id}",
-                style: TextStyle(
-                  color: Colors.green[900],
-                  fontSize: 45,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+          return Container();
+        },
+      ),
+    );
+  }
+
+  Widget buildBody() {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: ListView.builder(
+        itemCount: profileUserList.length,
+        itemBuilder: (BuildContext context, int index) {
+          final profileUser = profileUserList[index];
+          return ListTile(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("ID: ${profileUser.id}"),
+                Text("User ID: ${profileUser.userId}"),
+                Text("Title: ${profileUser.title}"),
+                Text("Body: ${profileUser.body}"),
+                Divider(), // Add a divider between items
+              ],
             ),
           );
-        }
+        },
       ),
     );
   }

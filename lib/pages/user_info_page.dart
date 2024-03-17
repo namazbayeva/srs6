@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:srs5/service/shared_preference.dart';
 
 class UserInfoPage extends StatelessWidget {
   @override
@@ -8,12 +9,12 @@ class UserInfoPage extends StatelessWidget {
       future: SharedPreferences.getInstance(),
       builder: (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(); // или другой индикатор загрузки
+          return Center(child: CircularProgressIndicator());
         } else {
           final SharedPreferences prefs = snapshot.data!;
-          final String name = prefs.getString('name') ?? '';
-          final String email = prefs.getString('email') ?? '';
-          final String phoneNumber = prefs.getString('phoneNumber') ?? '';
+          final String name = prefs.getString('name') ?? 'Nazerke';
+          final String email = prefs.getString('email') ?? 'naz@uib.kz';
+          final String phoneNumber = prefs.getString('phoneNumber') ?? '87777777777';
 
           return Scaffold(
             appBar: AppBar(

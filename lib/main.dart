@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srs5/pages/bottom_bar_page.dart';
 import 'package:srs5/pages/language_selection_page.dart';
-import 'package:srs5/pages/home_page.dart'; // Импортируем вашу страницу аутентифицированных пользователей
 import 'package:srs5/service/shared_preference.dart';
 
 void main() {
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Language Selection',
-      home: isAuthenticated ? BottomBarPage(name: '', email: '', phoneNumber: '') : LanguageSelectionPage() ,
+      title: 'My App',
+      home: isAuthenticated ? BottomBarPage(name: 'Nazerke', email: 'naz@uib.kz', phoneNumber: '87777777777') : LanguageSelectionPage(),
     );
   }
 }

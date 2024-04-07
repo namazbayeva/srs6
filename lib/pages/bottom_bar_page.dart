@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:srs5/pages/home_page.dart';
 import 'package:srs5/pages/language_selection_page.dart';
+import 'package:srs5/pages/qr/ui/qr_page.dart';
 import 'package:srs5/pages/second_page.dart';
 import 'package:srs5/pages/user_info_page.dart';
+import 'package:srs5/ui/pages/home_page.dart';
 import 'package:srs5/ui/pages/third_page.dart';
-
 
 
 class BottomBarPage extends StatefulWidget {
@@ -65,6 +65,10 @@ class _BottomBarPageState extends State<BottomBarPage> {
             label: 'Third Page',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.center_focus_strong, color: Colors.orange),
+            label: 'QR page',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person, color: Colors.orange),
             label: 'User Info Page',
           ),
@@ -82,10 +86,11 @@ class _BottomBarPageState extends State<BottomBarPage> {
       case 2:
         return ThirdPage();
       case 3:
+        return QrScannPage(); // Use QrScannPage here
+      case 4:
         return UserInfoPage();
       default:
         return Container();
     }
   }
 }
-

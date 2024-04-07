@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:srs5/service/shared_preference.dart';
 
 class UserInfoPage extends StatelessWidget {
   @override

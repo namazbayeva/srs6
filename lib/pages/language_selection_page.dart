@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:srs5/pages/bottom_bar_page.dart';
 import 'registration_page.dart';
 
 

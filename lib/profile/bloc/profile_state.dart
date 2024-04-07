@@ -10,6 +10,7 @@ class LoadingProfileState extends ProfileState{}
 class LoadedProfileState extends ProfileState{
   final List<ProfileUser> profileUser;
   LoadedProfileState(this.profileUser);
+
 }
 
 class FailureProfileState extends ProfileState{}

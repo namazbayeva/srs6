@@ -74,6 +74,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
+  // void _submitForm() {
+  //   if (_formKey.currentState!.validate()) {
+  //     _formKey.currentState!.save();
+  //     const url = 'https://srsp7-f71c5-default-rtdb.firebaseio.com//user.json';
+  //     http.post(Uri.parse(url),body: jsonEncode({
+  //       'name': nameController,
+  //       'phone': phoneNumberController,
+  //       'email': emailController,
+  //       'password': passwordController,
+  //     }));
+  //     _showDialog(name: _fullnameController.text);
+  //   } else {
+  //     _showMessage(message: LocaleKeys.submitForm.tr());
+  //   }
+  // }
+
   Widget _buildTextFieldWithIcon({
     required TextEditingController controller,
     required String labelText,
